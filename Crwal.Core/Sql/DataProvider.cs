@@ -76,7 +76,7 @@ namespace Crwal.Core.Sql
                     _myAdapter.SelectCommand = cmd;
                     _myAdapter.Fill(ds);
                     dataTable = ds.Tables[0];
-                    Logging.Infomation("Truy vấn thành công " + dataTable.ToJson());
+                    //Logging.Infomation("Truy vấn thành công " + dataTable.ToJson());
                     return dataTable;
                 }
             }

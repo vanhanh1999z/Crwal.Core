@@ -144,6 +144,10 @@ namespace Crwal.Core.Base
                 HttpResponseMessage res = await client.GetAsync(urlAddress);
                 htmlCode = await res.Content.ReadAsStringAsync();
             }
+            htmlCode = htmlCode.Replace("\r", "").Replace("\n", "").Replace("\t", "").Replace("&#13;", "").Replace("&#10;", ""); // xóa \r\n\t và \" thành dấu nháy đơn
+            htmlCode = Regex.Replace(htmlCode, @"[\s]{2,}", " "); // xóa nhiều khoảng trắng
+
+            htmlCode = System.Web.HttpUtility.HtmlDecode(htmlCode);
             return htmlCode;
         }
     }
