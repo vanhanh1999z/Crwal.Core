@@ -76,9 +76,9 @@
     <Compile Include="Base\Extensions.cs" />
     <Compile Include="Base\FileReadWrite.cs" />
     <Compile Include="Base\Utilities.cs" />
-    <Compile Include="Log\BaseLog.cs" />
-    <Compile Include="Log\Constants.cs" />
-    <Compile Include="Log\Logging.cs" />
+    <Compile Include="LogBase\BaseLog.cs" />
+    <Compile Include="LogBase\Constants.cs" />
+    <Compile Include="LogBase\Logging.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sql\ConnectionString.cs" />
     <Compile Include="Sql\DataProvider.cs" />
