@@ -19,6 +19,11 @@ namespace Crwal.Core.Log
             //await teleBot.SendTextMessageAsync(idTele, message);
             _log.Info("--- " + message);
         }
+        public static void Fatal(this string message)
+        {
+            //await teleBot.SendTextMessageAsync(idTele, message);
+            _log.Fatal("--- " + message);
+        }
 
         public static void Warning(this string message)
         {
