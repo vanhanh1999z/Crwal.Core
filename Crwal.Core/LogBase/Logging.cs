@@ -39,7 +39,7 @@ namespace Crwal.Core.Log
 
         public static async void Error(Exception ex)
         {
-            await teleBot.SendTextMessageAsync(idTele, ex.ToString());
+            //await teleBot.SendTextMessageAsync(idTele, ex.ToString());
             _log.Error($"--- Đã cõ lỗi xảy ra: {ex.ToString()} ", ex);
         }
         public static async void Error(Exception ex, string more)
