@@ -537,5 +537,6 @@ namespace Crwal.Core.Base
 
             return str_input;
         }
+
     }
 }
