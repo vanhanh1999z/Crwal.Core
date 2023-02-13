@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Xml;
+using System.Windows.Forms;
 
 namespace Crwal.Core.Base
 {
@@ -536,6 +536,19 @@ namespace Crwal.Core.Base
             str_input = str_input.ToLower();
 
             return str_input;
+        }
+        /// <summary>
+        /// Ghi dữ liệu vào Richtextbox
+        /// </summary>
+        /// <param name="content">Nội dung</param>
+        /// <param name="rtbResult">Richtextbox control</param>
+        public static void WriteToBox(string content, RichTextBox rtbResult)
+        {
+            if (rtbResult.Lines.Length > 200)
+            {
+                rtbResult.Clear();
+            }
+            rtbResult.AppendText("Lấy thành công comment: " + content + Environment.NewLine);
         }
 
     }
