@@ -67,6 +67,8 @@
     <Compile Include="Base\DownloadHtml.cs" />
     <Compile Include="Base\Extensions.cs" />
     <Compile Include="Base\FileReadWrite.cs" />
+    <Compile Include="Base\HashtagHelper.cs" />
+    <Compile Include="Base\StringCipher.cs" />
     <Compile Include="Base\Utilities.cs" />
     <Compile Include="LogBase\BaseLog.cs" />
     <Compile Include="LogBase\Constants.cs" />
