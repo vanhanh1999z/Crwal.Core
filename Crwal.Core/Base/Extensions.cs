@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Text;
 using System.Web.Script.Serialization;
 
@@ -19,11 +20,8 @@ namespace Crwal.Core.Base
         }
         public static string ToJson(this object obj)
         {
-            var serializer = new JavaScriptSerializer
-            {
-                MaxJsonLength = int.MaxValue,
-            };
-            return obj == null ? string.Empty : serializer.Serialize(obj);
+
+            return obj == null ? string.Empty : JsonConvert.SerializeObject(obj);
         }
         public static string BytesToString(this byte[] b)
         {
@@ -44,5 +42,6 @@ namespace Crwal.Core.Base
 
             return r;
         }
+
     }
 }

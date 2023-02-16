@@ -544,7 +544,7 @@ namespace Crwal.Core.Base
         /// <param name="rtbResult">Richtextbox control</param>
         public static void WriteToBox(string content, RichTextBox rtbResult)
         {
-            if (rtbResult.Lines.Length > 200)
+            if (rtbResult.Lines.Length > 100)
             {
                 rtbResult.Clear();
             }
