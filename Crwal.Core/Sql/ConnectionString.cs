@@ -1,5 +1,4 @@
 ﻿using Crwal.Core.Base;
-using System.Collections.Generic;
 
 namespace Crwal.Core.Sql
 {
