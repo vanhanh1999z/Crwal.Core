@@ -1,14 +1,15 @@
-﻿using Crwal.Core.Attribute;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using Crwal.Core.Attribute;
 
 namespace Crwal.Core.Base
 {
     public class FileReadWrite
     {
         public string _pathFile;
+
         [Tracing]
         public FileReadWrite(string pathFile)
         {
@@ -16,7 +17,7 @@ namespace Crwal.Core.Base
         }
 
         /// <summary>
-        /// đọc từng dòng của 1 file, trả ra 1 array list
+        ///     đọc từng dòng của 1 file, trả ra 1 array list
         /// </summary>
         /// <param name="pathFile"></param>
         /// <returns></returns>
@@ -26,26 +27,27 @@ namespace Crwal.Core.Base
             {
                 if (File.Exists(_pathFile))
                 {
-                    List<string> lis = new List<string>();
+                    var lis = new List<string>();
                     using (Stream stream = File.OpenRead(_pathFile))
                     {
-                        using (StreamReader r = new StreamReader(stream))
+                        using (var r = new StreamReader(stream))
                         {
-                            while (r.EndOfStream == false)
-                            {
-                                lis.Add(r.ReadLine());
-                            }
+                            while (r.EndOfStream == false) lis.Add(r.ReadLine());
                         }
                     }
+
                     return lis;
                 }
             }
-            catch { }
+            catch
+            {
+            }
+
             return null;
         }
 
         /// <summary>
-        /// đọc từng dòng của 1 file, trả ra 1 Dictionary - kiểu này không trùng
+        ///     đọc từng dòng của 1 file, trả ra 1 Dictionary - kiểu này không trùng
         /// </summary>
         /// <param name="pathFile"></param>
         /// <returns></returns>
@@ -55,32 +57,33 @@ namespace Crwal.Core.Base
             {
                 if (File.Exists(_pathFile))
                 {
-                    Dictionary<string, string> dic = new Dictionary<string, string>();
+                    var dic = new Dictionary<string, string>();
 
                     using (Stream stream = File.OpenRead(_pathFile))
                     {
-                        using (StreamReader r = new StreamReader(stream))
+                        using (var r = new StreamReader(stream))
                         {
                             while (r.EndOfStream == false)
                             {
-                                string line = r.ReadLine().Trim();
+                                var line = r.ReadLine().Trim();
 
-                                if (!dic.ContainsKey(line))
-                                {
-                                    dic.Add(line, "");
-                                }
+                                if (!dic.ContainsKey(line)) dic.Add(line, "");
                             }
                         }
                     }
+
                     return dic;
                 }
             }
-            catch { }
+            catch
+            {
+            }
+
             return null;
         }
 
         /// <summary>
-        /// Đọc toàn bộ text thông qua hàm ReadAllText
+        ///     Đọc toàn bộ text thông qua hàm ReadAllText
         /// </summary>
         /// <param name="pathFile"></param>
         /// <returns></returns>
@@ -88,18 +91,17 @@ namespace Crwal.Core.Base
         {
             try
             {
-                if (File.Exists(_pathFile))
-                {
-                    return File.ReadAllText(_pathFile).Trim();
-                }
+                if (File.Exists(_pathFile)) return File.ReadAllText(_pathFile).Trim();
             }
-            catch { }
+            catch
+            {
+            }
 
             return "";
         }
 
         /// <summary>
-        /// Ghi từng dòng text xuống file txt
+        ///     Ghi từng dòng text xuống file txt
         /// </summary>
         /// <param name="pathFile"></param>
         /// <param name="textline"></param>
@@ -108,25 +110,25 @@ namespace Crwal.Core.Base
         {
             try
             {
-                string folder = Path.GetDirectoryName(_pathFile);
-                if (!Directory.Exists(folder))
-                {
-                    Directory.CreateDirectory(folder);
-                }
+                var folder = Path.GetDirectoryName(_pathFile);
+                if (!Directory.Exists(folder)) Directory.CreateDirectory(folder);
 
-                using (StreamWriter sw = new StreamWriter(_pathFile, true, Encoding.UTF8)) // ghi kieu appent
+                using (var sw = new StreamWriter(_pathFile, true, Encoding.UTF8)) // ghi kieu appent
                 {
                     sw.WriteLine(textline);
                 }
+
                 return true;
             }
-            catch (Exception ex) { }
+            catch (Exception ex)
+            {
+            }
 
             return false;
         }
 
         /// <summary>
-        /// Ghi xuống file - nhưng trước khi ghi cần phải xóa file cũ
+        ///     Ghi xuống file - nhưng trước khi ghi cần phải xóa file cũ
         /// </summary>
         /// <param name="pathFile"></param>
         /// <param name="textline"></param>
@@ -135,30 +137,27 @@ namespace Crwal.Core.Base
         {
             try
             {
-                string folder = Path.GetDirectoryName(_pathFile);
-                if (!Directory.Exists(folder))
-                {
-                    Directory.CreateDirectory(folder);
-                }
+                var folder = Path.GetDirectoryName(_pathFile);
+                if (!Directory.Exists(folder)) Directory.CreateDirectory(folder);
 
-                if (File.Exists(_pathFile))
-                {
-                    File.Delete(_pathFile);
-                }
+                if (File.Exists(_pathFile)) File.Delete(_pathFile);
 
-                using (StreamWriter sw = new StreamWriter(_pathFile, true, Encoding.UTF8)) // ghi kieu appent
+                using (var sw = new StreamWriter(_pathFile, true, Encoding.UTF8)) // ghi kieu appent
                 {
                     sw.WriteLine(textline);
                 }
+
                 return true;
             }
-            catch (Exception ex) { }
+            catch (Exception ex)
+            {
+            }
 
             return false;
         }
 
         /// <summary>
-        /// Xóa file vĩnh viễn
+        ///     Xóa file vĩnh viễn
         /// </summary>
         /// <param name="pathFile"></param>
         /// <returns></returns>
@@ -166,13 +165,13 @@ namespace Crwal.Core.Base
         {
             try
             {
-                if (File.Exists(_pathFile))
-                {
-                    File.Delete(_pathFile);
-                }
+                if (File.Exists(_pathFile)) File.Delete(_pathFile);
                 return true;
             }
-            catch { }
+            catch
+            {
+            }
+
             return false;
         }
     }

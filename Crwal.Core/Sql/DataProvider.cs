@@ -1,38 +1,38 @@
-﻿using Crwal.Core.Log;
-using System;
+﻿using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
+using Crwal.Core.Log;
 
 namespace Crwal.Core.Sql
 {
     public class DataProvider
     {
+        private static string _error;
+        private readonly string _conStr;
 
         private SqlDataAdapter _myAdapter;
-        private string _conStr;
-        private static string _error;
+
         public DataProvider(string conStr)
         {
             _conStr = conStr;
         }
+
         public static SqlConnection OpenConnection(string _conStr)
         {
             try
             {
-                string conString = _conStr;
-                SqlConnection msqlCon = new SqlConnection(conString);
+                var conString = _conStr;
+                var msqlCon = new SqlConnection(conString);
 
-                if (msqlCon.State == ConnectionState.Closed || msqlCon.State == ConnectionState.Broken)
-                {
-                    msqlCon.Open();
-                }
+                if (msqlCon.State == ConnectionState.Closed || msqlCon.State == ConnectionState.Broken) msqlCon.Open();
                 return msqlCon;
             }
             catch (Exception ex)
             {
                 _error = ex.Message;
             }
+
             return null;
         }
 
@@ -40,13 +40,13 @@ namespace Crwal.Core.Sql
         {
             try
             {
-                using (SqlConnection conn = DataProvider.OpenConnection(_conStr))
+                using (var conn = OpenConnection(_conStr))
                 {
-                    DataTable dataTable = new DataTable();
-                    SqlCommand cmd = new SqlCommand(query, conn);
+                    var dataTable = new DataTable();
+                    var cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddRange(sqlParameter);
                     cmd.ExecuteNonQuery();
-                    DataSet ds = new DataSet();
+                    var ds = new DataSet();
                     _myAdapter = new SqlDataAdapter();
                     _myAdapter.SelectCommand = cmd;
                     _myAdapter.Fill(ds);
@@ -58,19 +58,21 @@ namespace Crwal.Core.Sql
             {
                 _error = ex.Message;
             }
+
             return null;
         }
+
         public async Task<DataTable> SelectAsync(string query)
         {
             try
             {
-                using (SqlConnection conn = DataProvider.OpenConnection(_conStr))
+                using (var conn = OpenConnection(_conStr))
                 {
-                    Logging.Infomation("Bắt đầu truy vấn dữ liệu " + query);
-                    DataTable dataTable = new DataTable();
-                    SqlCommand cmd = new SqlCommand(query, conn);
+                    ("Bắt đầu truy vấn dữ liệu " + query).Infomation();
+                    var dataTable = new DataTable();
+                    var cmd = new SqlCommand(query, conn);
                     await cmd.ExecuteNonQueryAsync();
-                    DataSet ds = new DataSet();
+                    var ds = new DataSet();
                     _myAdapter = new SqlDataAdapter();
                     _myAdapter.SelectCommand = cmd;
                     _myAdapter.Fill(ds);
@@ -84,8 +86,10 @@ namespace Crwal.Core.Sql
                 Logging.Error(ex, "Select - " + query);
                 _error = ex.Message;
             }
+
             return null;
         }
+
         public bool ExecuteNonQuery(string query, SqlParameter[] sqlParameter)
         {
             try
@@ -94,9 +98,9 @@ namespace Crwal.Core.Sql
                 //SqlParameter[] sqlParameters = new SqlParameter[1];
                 //sqlParameters[0] = new SqlParameter("@Cus_id", SqlDbType.Int);
                 //sqlParameters[0].Value = _id;
-                using (SqlConnection conn = DataProvider.OpenConnection(_conStr))
+                using (var conn = OpenConnection(_conStr))
                 {
-                    SqlCommand myCommand = new SqlCommand(_conStr, conn);
+                    var myCommand = new SqlCommand(_conStr, conn);
                     myCommand.CommandText = query;
                     myCommand.Parameters.AddRange(sqlParameter);
                     myCommand.ExecuteNonQuery();
@@ -110,13 +114,14 @@ namespace Crwal.Core.Sql
                 return false;
             }
         }
+
         public bool ExecuteNonQuery(string query)
         {
             try
             {
-                using (SqlConnection conn = DataProvider.OpenConnection(_conStr))
+                using (var conn = OpenConnection(_conStr))
                 {
-                    SqlCommand myCommand = new SqlCommand(_conStr, conn);
+                    var myCommand = new SqlCommand(_conStr, conn);
                     myCommand.CommandText = query;
                     myCommand.ExecuteNonQuery();
                     return true;

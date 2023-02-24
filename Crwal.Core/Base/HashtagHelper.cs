@@ -2,18 +2,8 @@
 {
     public class HashtagHelper
     {
-        public static string RemoveSignVietnameseString(string str)
+        private static readonly string[] VietnameseSigns =
         {
-            for (int i = 1; i < VietnameseSigns.Length; i++)
-            {
-                for (int j = 0; j < VietnameseSigns[i].Length; j++)
-                    str = str.Replace(VietnameseSigns[i][j], VietnameseSigns[0][i - 1]);
-            }
-            return str;
-        }
-        private static readonly string[] VietnameseSigns = new string[]
-        {
-
             "aAeEoOuUiIdDyY",
 
             "áàạảãâấầậẩẫăắằặẳẵ",
@@ -44,5 +34,13 @@
 
             "ÝỲỴỶỸ"
         };
+
+        public static string RemoveSignVietnameseString(string str)
+        {
+            for (var i = 1; i < VietnameseSigns.Length; i++)
+            for (var j = 0; j < VietnameseSigns[i].Length; j++)
+                str = str.Replace(VietnameseSigns[i][j], VietnameseSigns[0][i - 1]);
+            return str;
+        }
     }
 }

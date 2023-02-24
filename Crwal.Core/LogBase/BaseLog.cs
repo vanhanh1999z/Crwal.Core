@@ -2,12 +2,13 @@
 
 namespace Crwal.Core.Log
 {
-    class BaseClass
+    internal class BaseClass
     {
         protected BaseClass()
         {
             Log = LogManager.GetLogger(GetType().ToString());
         }
-        protected Logger Log { get; private set; }
+
+        protected Logger Log { get; }
     }
 }

@@ -1,7 +1,7 @@
-﻿using PostSharp.Aspects;
-using PostSharp.Serialization;
-using System;
+﻿using System;
 using System.IO;
+using PostSharp.Aspects;
+using PostSharp.Serialization;
 
 namespace Crwal.Core.Attribute
 {
@@ -9,12 +9,10 @@ namespace Crwal.Core.Attribute
     public class TracingAttribute : OnExceptionAspect
     {
         private readonly string _pathLog = @":D\TracingLog.txt" + DateTime.Now.ToString("dd/M/yyyy");
+
         public override void OnException(MethodExecutionArgs args)
         {
-            if (!File.Exists(_pathLog))
-            {
-                File.Create(_pathLog);
-            }
+            if (!File.Exists(_pathLog)) File.Create(_pathLog);
             File.AppendText(args.Exception.Message);
         }
     }

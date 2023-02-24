@@ -8,14 +8,12 @@ namespace Crwal.Core.Base
 {
     public static class StringCipher
     {
-
         private const int Keysize = 256;
 
         private const int DerivationIterations = 1000;
 
         public static string Encrypt(string plainText, string passPhrase)
         {
-
             var saltStringBytes = Generate256BitsOfRandomEntropy();
             var ivStringBytes = Generate256BitsOfRandomEntropy();
             var plainTextBytes = Encoding.UTF8.GetBytes(plainText);
@@ -50,11 +48,11 @@ namespace Crwal.Core.Base
 
         public static string Decrypt(string cipherText, string passPhrase = "hlgaukl1659")
         {
-
             var cipherTextBytesWithSaltAndIv = Convert.FromBase64String(cipherText);
             var saltStringBytes = cipherTextBytesWithSaltAndIv.Take(Keysize / 8).ToArray();
             var ivStringBytes = cipherTextBytesWithSaltAndIv.Skip(Keysize / 8).Take(Keysize / 8).ToArray();
-            var cipherTextBytes = cipherTextBytesWithSaltAndIv.Skip((Keysize / 8) * 2).Take(cipherTextBytesWithSaltAndIv.Length - ((Keysize / 8) * 2)).ToArray();
+            var cipherTextBytes = cipherTextBytesWithSaltAndIv.Skip(Keysize / 8 * 2)
+                .Take(cipherTextBytesWithSaltAndIv.Length - Keysize / 8 * 2).ToArray();
 
             using (var password = new Rfc2898DeriveBytes(passPhrase, saltStringBytes, DerivationIterations))
             {
@@ -86,6 +84,7 @@ namespace Crwal.Core.Base
             {
                 rngCsp.GetBytes(randomBytes);
             }
+
             return randomBytes;
         }
     }
