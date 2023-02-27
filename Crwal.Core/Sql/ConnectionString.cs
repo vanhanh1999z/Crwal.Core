@@ -1,29 +1,37 @@
 ﻿using Crwal.Core.Base;
-using System.Collections.Generic;
 
 namespace Crwal.Core.Sql
 {
     public class ConnectionString : IConnectionString
     {
+<<<<<<< HEAD
         public string ServerName { get; set; }
         public string User { get; set; }
         public string Password { get; set; }
         public string DataBase { get; set; }
+=======
+>>>>>>> 0fc86f9c04b153fd9cf6ddbb32e289c4765ba906
         public ConnectionString(string serverName, string user, string password)
         {
-            this.ServerName = serverName;
-            this.User = user;
-            this.Password = password;
+            ServerName = serverName;
+            User = user;
+            Password = password;
         }
 
+<<<<<<< HEAD
         public ConnectionString(string serverName, string user, string password, string dataBase) : this(serverName, user, password)
         {
             DataBase = dataBase;
         }
+=======
+        private string ServerName { get; set; }
+        private string User { get; set; }
+        private string Password { get; set; }
+>>>>>>> 0fc86f9c04b153fd9cf6ddbb32e289c4765ba906
 
         public string BuildConnectionString()
         {
-            string dePass = StringCipher.Decrypt(Password);
+            var dePass = StringCipher.Decrypt(Password);
             return $"Data Source={ServerName};Initial Catalog = social_index_v2; User ID = {User}; Password = {dePass}";
         } public string BuildConnectionStringWithDb()
         {
