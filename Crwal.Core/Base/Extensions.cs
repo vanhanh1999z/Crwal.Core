@@ -20,7 +20,6 @@ namespace Crwal.Core.Base
         }
         public static string ToJson(this object obj)
         {
-
             return obj == null ? string.Empty : JsonConvert.SerializeObject(obj);
         }
         public static string BytesToString(this byte[] b)
