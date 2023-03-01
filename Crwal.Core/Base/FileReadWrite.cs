@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using Crwal.Core.Attribute;
 
 namespace Crwal.Core.Base
 {
@@ -10,7 +9,6 @@ namespace Crwal.Core.Base
     {
         public string _pathFile;
 
-        [Tracing]
         public FileReadWrite(string pathFile)
         {
             _pathFile = pathFile;
