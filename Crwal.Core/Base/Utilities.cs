@@ -255,7 +255,7 @@ namespace Crwal.Core.Base
 
         public static double DateTimeToUnixTimestamp(DateTime dateTime)
         {
-            return dateTime.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
+            return dateTime.Subtract(new DateTime(1970, 1, 1)).TotalSeconds;
         }
 
         public static List<string> GetListImgFromHTML(string htmlImage)
