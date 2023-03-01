@@ -2,15 +2,12 @@
 
 namespace Crwal.Core.Sql
 {
-    public class ConnectionString : IConnectionString
+    public class ConnectionString
     {
-<<<<<<< HEAD
         public string ServerName { get; set; }
         public string User { get; set; }
         public string Password { get; set; }
         public string DataBase { get; set; }
-=======
->>>>>>> 0fc86f9c04b153fd9cf6ddbb32e289c4765ba906
         public ConnectionString(string serverName, string user, string password)
         {
             ServerName = serverName;
@@ -18,9 +15,10 @@ namespace Crwal.Core.Sql
             Password = password;
         }
 
-        private string ServerName { get; set; }
-        private string User { get; set; }
-        private string Password { get; set; }
+        public ConnectionString(string serverName, string user, string password, string dataBase) : this(serverName, user, password)
+        {
+            DataBase = dataBase;
+        }
 
         public string BuildConnectionString()
         {
