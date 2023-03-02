@@ -49,7 +49,8 @@
         public enum Process
         {
             Token = 1,
-            Login = 2
+            Login = 2,
+            TokenAll =3
         }
     }    
 }
