@@ -27,7 +27,7 @@ namespace Crwal.Core.Sql
         } public string BuildConnectionStringWithDb()
         {
             string dePass = StringCipher.Decrypt(Password);
-            return $"Data Source={ServerName};Initial Catalog = {DataBase}; User ID = {User}; Password = {dePass}";
+            return $"Data Source={ServerName};Initial Catalog = {DataBase}; User ID = {User}; Password = {dePass}; CharSet=utf8;";
         }
     }
 }
