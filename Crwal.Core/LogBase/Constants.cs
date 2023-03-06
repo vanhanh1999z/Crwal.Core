@@ -1,4 +1,6 @@
-﻿namespace Crwal.Core.Log
+﻿using System;
+
+namespace Crwal.Core.Log
 {
     public struct Constants
     {
