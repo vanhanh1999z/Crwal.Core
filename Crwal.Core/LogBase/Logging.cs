@@ -20,19 +20,16 @@ namespace Crwal.Core.Log
 
         public static void Infomation(this string message)
         {
-            //await teleBot.SendTextMessageAsync(idTele, message);
             _log.Info("--- " + message);
         }
 
         public static void Fatal(this string message)
         {
-            //await teleBot.SendTextMessageAsync(idTele, message);
             _log.Fatal("--- " + message);
         }
 
         public static void Warning(this string message)
         {
-            //await teleBot.SendTextMessageAsync(idTele, message);
             _log.Warn("--- " + message);
         }
 
@@ -42,9 +39,8 @@ namespace Crwal.Core.Log
             _log.Error("--- Đã cõ lỗi xảy ra: " + ex);
         }
 
-        public static async void Error(Exception ex)
+        public static void Error(Exception ex)
         {
-            await teleBot.SendTextMessageAsync(idTele, ex.ToString());
             _log.Error($"--- Đã cõ lỗi xảy ra: {ex} ", ex);
         }
 
@@ -53,9 +49,9 @@ namespace Crwal.Core.Log
             _log.Error($"--- Đã cõ lỗi xảy ra: {ex}");
         }
 
-        public static async void Error(Exception ex, string more)
+        public static void Error(Exception ex, string more)
         {
-            await teleBot.SendTextMessageAsync(idTele, ex.ToString());
+            //await teleBot.SendTextMessageAsync(idTele, ex.ToString());
             _log.Error($"--- Đã cõ lỗi xảy ra: ${more}", ex);
             _log.Error($"--- ---Nội dung lỗi: ${ex}", ex);
         }

@@ -23,11 +23,12 @@ namespace Crwal.Core.Sql
         public string BuildConnectionString()
         {
             var dePass = StringCipher.Decrypt(Password);
-            return $"Data Source={ServerName};Initial Catalog = social_index_v2; User ID = {User}; Password = {dePass}";
-        } public string BuildConnectionStringWithDb()
+            return $"Data Source={ServerName};Initial Catalog = social_index_v2; User ID = {User}; Password = {dePass}; CharSet=utf8; Pooling=True";
+        }
+        public string BuildConnectionStringWithDb()
         {
             string dePass = StringCipher.Decrypt(Password);
-            return $"Data Source={ServerName};Initial Catalog = {DataBase}; User ID = {User}; Password = {dePass}; CharSet=utf8;";
+            return $"Data Source={ServerName};Initial Catalog = {DataBase}; User ID = {User}; Password = {dePass}; CharSet=utf8; Pooling=True";
         }
     }
 }
