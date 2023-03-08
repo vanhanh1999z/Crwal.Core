@@ -530,7 +530,12 @@ namespace Crwal.Core.Base
         public static void WriteToBox(string content, RichTextBox rtbResult)
         {
             if (rtbResult.Lines.Length > 100) rtbResult.Clear();
-            rtbResult.AppendText("Lấy thành công comment: " + content + Environment.NewLine);
+            rtbResult.AppendText(content + Environment.NewLine);
+        }
+        public static void WriteToBox(Exception ex, RichTextBox rtbResult)
+        {
+            if (rtbResult.Lines.Length > 100) rtbResult.Clear();
+            rtbResult.AppendText("\n--- --- Đã xảy ra sự cố: " + ex.Message + Environment.NewLine);
         }
     }
 }
