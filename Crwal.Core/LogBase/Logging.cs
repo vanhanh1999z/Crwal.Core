@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using NLog;
 using NLog.Config;
@@ -41,7 +42,7 @@ namespace Crwal.Core.Log
 
         public static void Error(Exception ex)
         {
-            _log.Error($"--- Đã cõ lỗi xảy ra: {ex} ", ex);
+            _log.Error($"--- Đã cõ lỗi xảy ra: {ex}", ex);
         }
 
         public static void Error(string ex)
@@ -52,8 +53,8 @@ namespace Crwal.Core.Log
         public static void Error(Exception ex, string more)
         {
             //await teleBot.SendTextMessageAsync(idTele, ex.ToString());
-            _log.Error($"--- Đã cõ lỗi xảy ra: ${more}", ex);
-            _log.Error($"--- ---Nội dung lỗi: ${ex}", ex);
+            _log.Error($"--- Đã cõ lỗi xảy ra: ${more}", ex.Message);
+            _log.Error($"--- ---Nội dung lỗi: ${ex}", ex.Message);
         }
 
         private static int GetLineException(Exception ex)
