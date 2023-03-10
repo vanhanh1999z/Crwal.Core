@@ -44,14 +44,15 @@
             Done = 0
         }
     }
+
     public class SysFbEnum
     {
         public enum Process
         {
             Token = 1,
             Login = 2,
-            TokenAll =3,
-            TokenJob  = 4
+            TokenAll = 3,
+            TokenJob = 4
         }
-    }    
+    }
 }

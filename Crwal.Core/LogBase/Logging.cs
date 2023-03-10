@@ -1,11 +1,10 @@
-﻿using System;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using NLog;
+﻿using NLog;
 using NLog.Config;
 using NLog.Targets;
+using System;
+using System.Diagnostics;
+using System.IO;
+using System.Threading.Tasks;
 using Telegram.Bot;
 
 namespace Crwal.Core.Log
@@ -96,6 +95,7 @@ namespace Crwal.Core.Log
             _log.Info("Đã khởi tạo logging thành công");
             _log.Info("--- Chương trình bắt đầu khởi chạy ---");
         }
+
         public static void Init(string projectName, string path)
         {
             var config = new LoggingConfiguration();

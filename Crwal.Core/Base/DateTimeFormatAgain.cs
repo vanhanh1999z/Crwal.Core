@@ -84,11 +84,11 @@ namespace Crwal.Core.Base
                 return time;
             }
 
-            // nếu tồn tại kiểu 8h11 
+            // nếu tồn tại kiểu 8h11
             regTime = Regex.IsMatch(strDate, @"([\d]+h[\d]+)", RegexOptions.IgnoreCase);
             if (regTime)
             {
-                time = Utilities.RegexFilter(strDate, @"([\d]+h[\d]+)"); // cố gắng dò kiểu 8h11 
+                time = Utilities.RegexFilter(strDate, @"([\d]+h[\d]+)"); // cố gắng dò kiểu 8h11
                 if (!string.IsNullOrEmpty(time)) time = time.Replace("h", ":");
             }
 
@@ -169,7 +169,7 @@ namespace Crwal.Core.Base
             regTime = Regex.IsMatch(strDate, @"[\d]+:[\d]+:[\d]+", RegexOptions.IgnoreCase);
             if (regTime)
             {
-                time = Utilities.RegexFilter(strDate, @"[\d]+:[\d]+:[\d]+"); // cố gắng dò kiểu 10:03 
+                time = Utilities.RegexFilter(strDate, @"[\d]+:[\d]+:[\d]+"); // cố gắng dò kiểu 10:03
                 var arrTime = time.Split(':');
                 if (arrTime.Length == 3)
                 {
@@ -212,15 +212,15 @@ namespace Crwal.Core.Base
             regTime = Regex.IsMatch(strDate, @"[\d]{2,}:[\d]{2,}", RegexOptions.IgnoreCase);
             if (regTime)
             {
-                time = Utilities.RegexFilter(strDate, @"[\d]{2,}:[\d]{2,}"); // cố gắng dò kiểu 10:03 
+                time = Utilities.RegexFilter(strDate, @"[\d]{2,}:[\d]{2,}"); // cố gắng dò kiểu 10:03
                 return time;
             }
 
-            // nếu tồn tại kiểu 08.11 
+            // nếu tồn tại kiểu 08.11
             regTime = Regex.IsMatch(strDate, @"[\s]+([\d]{2}\.[\d]+)", RegexOptions.IgnoreCase);
             if (regTime)
             {
-                time = Utilities.RegexFilter(strDate, @"[\s]+([\d]{2}\.[\d]+)"); // cố gắng dò kiểu 8h11 
+                time = Utilities.RegexFilter(strDate, @"[\s]+([\d]{2}\.[\d]+)"); // cố gắng dò kiểu 8h11
                 if (!string.IsNullOrEmpty(time)) time = time.Replace(".", ":");
             }
 
@@ -375,7 +375,7 @@ namespace Crwal.Core.Base
 
                 if (ruleDate != string.Empty) return GetDateByRule(sDate, ruleDate);
 
-                #endregion
+                #endregion có truyền vào Rule date
 
                 var dateBySearch = GetDateBySearchText(sDate, ruleDate);
 
@@ -415,7 +415,7 @@ namespace Crwal.Core.Base
                     return DateTime.Now.AddYears(-y).ToString("yyyy-MM-dd");
                 }
 
-                #endregion
+                #endregion chỉ có: 1h, 1 ngày
 
                 if (!string.IsNullOrEmpty(dateBySearch)) // vẫn không có thì đưa vào dạng này xem sao
                     return GetDateByRule(sDate, "dd/MM/yyyy");
@@ -451,42 +451,49 @@ namespace Crwal.Core.Base
                             arr = dateTmp.Split('/');
                             if (arr.Length == 2) return arr[0] + "-" + arr[1] + "-" + DateTime.Now.Year;
                             break;
+
                         case "dd.MM": // chi co ngay va thang
                             if (sDate.Length > 5) dateTmp = Utilities.RegexFilter(dateTmp, @"[\d]+\.[\d]+");
 
                             arr = dateTmp.Split('.');
                             if (arr.Length == 2) return arr[0] + "-" + arr[1] + "-" + DateTime.Now.Year;
                             break;
+
                         case "dd-MM": // chi co ngay va thang
                             if (sDate.Length > 5) dateTmp = Utilities.RegexFilter(dateTmp, @"[\d]+-[\d]+");
 
                             arr = dateTmp.Split('-');
                             if (arr.Length == 2) return arr[0] + "-" + arr[1] + "-" + DateTime.Now.Year;
                             break;
+
                         case "dd/MM/yyyy":
                             if (sDate.Length > 10) dateTmp = Utilities.RegexFilter(dateTmp, @"[\d]+\/[\d]+\/[\d]{4}");
 
                             arr = dateTmp.Split('/');
                             if (arr.Length >= 3) return arr[2] + "-" + arr[1] + "-" + arr[0];
                             break;
+
                         case "MM/dd/yyyy":
                             if (sDate.Length > 10) dateTmp = Utilities.RegexFilter(dateTmp, @"[\d]+\/[\d]+\/[\d]{4}");
 
                             arr = dateTmp.Split('/');
                             if (arr.Length >= 3) return arr[2] + "-" + arr[0] + "-" + arr[1];
                             break;
+
                         case "dd/MM/yy":
                             if (sDate.Length > 8) dateTmp = Utilities.RegexFilter(dateTmp, @"[\d]+\/[\d]+\/[\d]{2,}");
 
                             arr = dateTmp.Split('/');
                             if (arr.Length >= 3) return "20" + arr[2] + "-" + arr[1] + "-" + arr[0];
                             break;
+
                         case "MM/dd/yy":
                             if (sDate.Length > 8) dateTmp = Utilities.RegexFilter(dateTmp, @"[\d]+\/[\d]+\/[\d]{2,}");
 
                             arr = dateTmp.Split('/');
                             if (arr.Length >= 3) return "20" + arr[2] + "-" + arr[0] + "-" + arr[1];
                             break;
+
                         case "MMM dd, yyyy": // ex: May 14, 2014
                             if (sDate.Length > 12)
                                 dateTmp = Utilities.RegexFilter(dateTmp, @"[\w]{3}[\s]+[\d]+public int \s]+[\d]{4}");
@@ -496,6 +503,7 @@ namespace Crwal.Core.Base
                                 return arr[2] + "-" + GetMonthFromText_English(arr[0].ToLower()) + "-" +
                                        arr[1].Replace(",", "");
                             break;
+
                         case "dd-MM-yyyy":
                             if (sDate.Length > 10) // 23-02-2014, <span class='time'>07:34, hoặc 1-2-2014
                                 dateTmp = Utilities.RegexFilter(dateTmp, @"[\d]+-[\d]+-[\d]{4}");
@@ -513,6 +521,7 @@ namespace Crwal.Core.Base
                             }
 
                             break;
+
                         case "yyyy-MM-dd":
                             if (sDate.Length > 10) // 23-02-2014, <span class='time'>07:34
                                 dateTmp = Utilities.RegexFilter(dateTmp, @"[\d]{4}-[\d]+-[\d]+");
@@ -520,9 +529,11 @@ namespace Crwal.Core.Base
                             arr = dateTmp.Split('-');
                             if (arr.Length >= 3) return arr[0] + "-" + arr[1] + "-" + arr[2];
                             break;
+
                         case "yyyy.MM.dd":
                             if (sDate.Length > 10) dateTmp = Utilities.RegexFilter(dateTmp, @"[\d]{4}\.[\d]+\.[\d]+");
                             return dateTmp.Replace(".", "-");
+
                         case "MM-dd-yyyy":
                             if (sDate.Length > 10) // 11-04-2011, <span class='time'>11:03 am
                                 dateTmp = Utilities.RegexFilter(dateTmp, @"[\d]+-[\d]+-[\d]{4}");
@@ -530,24 +541,28 @@ namespace Crwal.Core.Base
                             arr = dateTmp.Split('-');
                             if (arr.Length >= 3) return arr[2] + "-" + arr[0] + "-" + arr[1];
                             break;
+
                         case "dd.MM.yyyy":
                             if (sDate.Length > 10) dateTmp = Utilities.RegexFilter(dateTmp, @"[\d]+\.[\d]+\.[\d]{4}");
 
                             arr = dateTmp.Split('.');
                             if (arr.Length >= 3) return arr[2] + "-" + arr[1] + "-" + arr[0];
                             break;
+
                         case "dd.MM.yy":
                             if (sDate.Length > 10) dateTmp = Utilities.RegexFilter(dateTmp, @"[\d]+\.[\d]+\.[\d]{2}");
 
                             arr = dateTmp.Split('.');
                             if (arr.Length >= 3) return "20" + arr[2] + "-" + arr[1] + "-" + arr[0];
                             break;
+
                         case "yyyy/MM/dd":
                             if (sDate.Length > 10) dateTmp = Utilities.RegexFilter(dateTmp, @"[\d]{4}\/[\d]+\/[\d]+");
 
                             arr = dateTmp.Split('/');
                             if (arr.Length >= 3) return arr[0] + "-" + arr[1] + "-" + arr[2];
                             break;
+
                         case "ngày dd tháng MM":
 
                             if (sDate.Length > 10)
@@ -566,7 +581,7 @@ namespace Crwal.Core.Base
                     }
                 }
 
-                #endregion
+                #endregion có truyền vào Rule date dạng dd/MM/yyyy hay dd/MM
             }
             catch (Exception ex)
             {
@@ -691,7 +706,7 @@ namespace Crwal.Core.Base
                     }
                 }
 
-                #endregion
+                #endregion một ngày trước
 
                 #region một giờ trước, phút trước
 
@@ -700,7 +715,7 @@ namespace Crwal.Core.Base
                     if (sDate.ToLower().Contains("một giờ trước"))
                         return DateTime.Now.ToString("yyyy-MM-dd");
 
-                #endregion
+                #endregion một giờ trước, phút trước
 
                 #region một tháng trước
 
@@ -729,7 +744,7 @@ namespace Crwal.Core.Base
                     }
                 }
 
-                #endregion
+                #endregion một tháng trước
 
                 #region một năm trước
 
@@ -758,9 +773,9 @@ namespace Crwal.Core.Base
                     }
                 }
 
-                #endregion
+                #endregion một năm trước
 
-                #endregion
+                #endregion có chữ hôm nay, hôm qua, today, yesterday, cách đây giờ, phút, một ngày trước.... - return luôn
             }
             catch (Exception ex)
             {
@@ -797,7 +812,7 @@ namespace Crwal.Core.Base
                     }
                 }
 
-                #endregion
+                #endregion dò kiểu April 4
 
                 #region Sunday 1 April 2018
 
@@ -822,7 +837,7 @@ namespace Crwal.Core.Base
                     }
                 }
 
-                #endregion
+                #endregion Sunday 1 April 2018
 
                 #region dò kiểu 28/05.2016
 
@@ -837,7 +852,7 @@ namespace Crwal.Core.Base
                     return subDate;
                 }
 
-                #endregion
+                #endregion dò kiểu 28/05.2016
 
                 #region gặp kiểu ngày 31 tháng 12 năm 2014
 
@@ -850,7 +865,7 @@ namespace Crwal.Core.Base
                     if (lisDig.Count >= 3) return lisDig[2] + "-" + lisDig[1] + "-" + lisDig[0];
                 }
 
-                #endregion
+                #endregion gặp kiểu ngày 31 tháng 12 năm 2014
 
                 #region gặp kiểu:   27 Tháng 04, 2016 | 08:56 ->
 
@@ -861,7 +876,7 @@ namespace Crwal.Core.Base
                     if (lisDig.Count >= 3) return lisDig[2] + "-" + lisDig[1] + "-" + lisDig[0];
                 }
 
-                #endregion
+                #endregion gặp kiểu:   27 Tháng 04, 2016 | 08:56 ->
 
                 #region Ngày 15 Tháng 5, 2015 | 07:49 PM
 
@@ -873,7 +888,7 @@ namespace Crwal.Core.Base
                     if (lisDig.Count >= 3) return lisDig[2] + "-" + lisDig[1] + "-" + lisDig[0];
                 }
 
-                #endregion
+                #endregion Ngày 15 Tháng 5, 2015 | 07:49 PM
 
                 #region gặp định dạng kiểu: 29 tháng 11 2016
 
@@ -885,7 +900,7 @@ namespace Crwal.Core.Base
                     if (lisDig.Count >= 3) return lisDig[2] + "-" + lisDig[1] + "-" + lisDig[0];
                 }
 
-                #endregion
+                #endregion gặp định dạng kiểu: 29 tháng 11 2016
 
                 #region gặp định dạng kiểu: 15 Tháng mười hai 2012
 
@@ -900,7 +915,7 @@ namespace Crwal.Core.Base
                     if (lisDig != null && lisDig.Count == 2) return lisDig[1] + "-" + month + "-" + lisDig[0];
                 }
 
-                #endregion
+                #endregion gặp định dạng kiểu: 15 Tháng mười hai 2012
 
                 #region Cập nhật08:45, Thứ hai Ngày 23, Tháng 2, 2015
 
@@ -911,7 +926,7 @@ namespace Crwal.Core.Base
                     return lisDig[lisDig.Count - 1] + "-" + lisDig[lisDig.Count - 2] + "-" + lisDig[lisDig.Count - 3];
                 }
 
-                #endregion
+                #endregion Cập nhật08:45, Thứ hai Ngày 23, Tháng 2, 2015
 
                 #region Tháng 9 2, 2016
 
@@ -927,7 +942,7 @@ namespace Crwal.Core.Base
                     }
                 }
 
-                #endregion
+                #endregion Tháng 9 2, 2016
 
                 #region dò xem kiểu này không:  Thứ ba, 29 Tháng 9 2015 17:24 hay Chủ nhật, 29 Tháng 9 2015 17:24
 
@@ -945,7 +960,7 @@ namespace Crwal.Core.Base
                     }
                 }
 
-                #endregion
+                #endregion dò xem kiểu này không:  Thứ ba, 29 Tháng 9 2015 17:24 hay Chủ nhật, 29 Tháng 9 2015 17:24
 
                 #region định dạng kiểu Thứ sáu, 31 Tháng 7 2015
 
@@ -963,7 +978,7 @@ namespace Crwal.Core.Base
                     }
                 }
 
-                #endregion
+                #endregion định dạng kiểu Thứ sáu, 31 Tháng 7 2015
 
                 #region gap kieu NGÀY 10 THÁNG 11, 2015 | 15:03 => http: //suckhoedoisong.vn/kip-thoi-cuu-nam-thanh-nien-bi-thanh-sat-2m-dam-xuyen-that-lung-qua-hau-mon-n109044.html
 
@@ -982,7 +997,7 @@ namespace Crwal.Core.Base
                     }
                 }
 
-                #endregion
+                #endregion gap kieu NGÀY 10 THÁNG 11, 2015 | 15:03 => http: //suckhoedoisong.vn/kip-thoi-cuu-nam-thanh-nien-bi-thanh-sat-2m-dam-xuyen-that-lung-qua-hau-mon-n109044.html
 
                 // 22 Th6 2017
                 isMatch = Regex.IsMatch(sDate.ToLower(), @"[\d]+ Th[\d]+ [\d]{4}", RegexOptions.IgnoreCase);
@@ -998,7 +1013,7 @@ namespace Crwal.Core.Base
                     }
                 }
 
-                #endregion
+                #endregion không truyền vào Rule date, cố gắng tìm thêm xem có kết quả không?
 
                 #region dò kiểu 8 Th5, 2017
 
@@ -1015,7 +1030,7 @@ namespace Crwal.Core.Base
                     }
                 }
 
-                #endregion
+                #endregion dò kiểu 8 Th5, 2017
 
                 #region gặp kiểu 00:00 - 15/33
 
@@ -1034,7 +1049,7 @@ namespace Crwal.Core.Base
                     }
                 }
 
-                #endregion
+                #endregion gặp kiểu 00:00 - 15/33
 
                 #region gặp kiểu 06:27 PM, 12 11 2015
 
@@ -1050,7 +1065,7 @@ namespace Crwal.Core.Base
                     }
                 }
 
-                #endregion
+                #endregion gặp kiểu 06:27 PM, 12 11 2015
 
                 #region gặp kiểu 06:27 PM 12 11 2015
 
@@ -1066,7 +1081,7 @@ namespace Crwal.Core.Base
                     }
                 }
 
-                #endregion
+                #endregion gặp kiểu 06:27 PM 12 11 2015
 
                 #region gặp kiểu 15 Th7 2016 [\d]+[\s]+Th[\d]+[\s]+[\d]{4}
 
@@ -1081,7 +1096,7 @@ namespace Crwal.Core.Base
                     }
                 }
 
-                #endregion
+                #endregion gặp kiểu 15 Th7 2016 [\d]+[\s]+Th[\d]+[\s]+[\d]{4}
 
                 #region gặp kiểu: 30 Tháng Mười Hai, 2015
 
@@ -1100,7 +1115,7 @@ namespace Crwal.Core.Base
                     }
                 }
 
-                #endregion
+                #endregion gặp kiểu: 30 Tháng Mười Hai, 2015
 
                 #region T3, 07 / 2016
 
@@ -1119,7 +1134,7 @@ namespace Crwal.Core.Base
                     }
                 }
 
-                #endregion
+                #endregion T3, 07 / 2016
 
                 #region 21st, Tháng Bảy, 2016
 
@@ -1139,7 +1154,7 @@ namespace Crwal.Core.Base
                     }
                 }
 
-                #endregion
+                #endregion 21st, Tháng Bảy, 2016
 
                 #region Tháng Chín 10, 2016 4:29 chiều
 
@@ -1161,7 +1176,7 @@ namespace Crwal.Core.Base
                     }
                 }
 
-                #endregion
+                #endregion Tháng Chín 10, 2016 4:29 chiều
 
                 #region Jul 18, 2017, 11:06 PM ET
 
@@ -1182,7 +1197,7 @@ namespace Crwal.Core.Base
                     }
                 }
 
-                #endregion
+                #endregion Jul 18, 2017, 11:06 PM ET
 
                 #region 1 Jan 2016 hay 1 january 2016
 
@@ -1203,7 +1218,7 @@ namespace Crwal.Core.Base
                     }
                 }
 
-                #endregion
+                #endregion 1 Jan 2016 hay 1 january 2016
 
                 #region Sunday, July 16, 2017
 
@@ -1221,7 +1236,7 @@ namespace Crwal.Core.Base
                     }
                 }
 
-                #endregion
+                #endregion Sunday, July 16, 2017
 
                 #region gặp kiểu Nov 3 2015
 
@@ -1239,7 +1254,7 @@ namespace Crwal.Core.Base
                     }
                 }
 
-                #endregion
+                #endregion gặp kiểu Nov 3 2015
 
                 #region 3 August,2016 hay 3 August, 2016
 
@@ -1266,7 +1281,7 @@ namespace Crwal.Core.Base
                     }
                 }
 
-                #endregion
+                #endregion 3 August,2016 hay 3 August, 2016
 
                 #region gặp kiểu May 17th, 2016 2:24 am
 
@@ -1288,7 +1303,7 @@ namespace Crwal.Core.Base
                     }
                 }
 
-                #endregion
+                #endregion gặp kiểu May 17th, 2016 2:24 am
 
                 #region gặp kiểu: May 5th, 7:27 am
 
@@ -1310,7 +1325,7 @@ namespace Crwal.Core.Base
                     }
                 }
 
-                #endregion
+                #endregion gặp kiểu: May 5th, 7:27 am
 
                 #region gặp kiểu Monday, 9:29 am
 
@@ -1331,7 +1346,7 @@ namespace Crwal.Core.Base
                     }
                 }
 
-                #endregion
+                #endregion gặp kiểu Monday, 9:29 am
 
                 #region kiểu toàn số thì kiểm tra chuyển thử sang kiểu
 
@@ -1342,7 +1357,7 @@ namespace Crwal.Core.Base
                     if (!string.IsNullOrEmpty(dt)) return dt;
                 }
 
-                #endregion
+                #endregion kiểu toàn số thì kiểm tra chuyển thử sang kiểu
             }
             catch (Exception ex)
             {
@@ -1351,7 +1366,6 @@ namespace Crwal.Core.Base
 
             return "";
         }
-
 
         /// <summary>
         ///     Chuyển đổi tháng từ tên dạng Text sang dạng số. Ví dụ: january thành 01
@@ -1532,7 +1546,7 @@ namespace Crwal.Core.Base
                     }
                 }
 
-                #endregion
+                #endregion nếu tồn tại kiểu: cách đây 5 giây
 
                 #region nếu tồn tại kiểu: cách đây 5 phút
 
@@ -1551,7 +1565,7 @@ namespace Crwal.Core.Base
                     }
                 }
 
-                #endregion
+                #endregion nếu tồn tại kiểu: cách đây 5 phút
 
                 #region nếu tồn tại kiểu: cách đây 5 tiếng
 
@@ -1570,7 +1584,7 @@ namespace Crwal.Core.Base
                     }
                 }
 
-                #endregion
+                #endregion nếu tồn tại kiểu: cách đây 5 tiếng
 
                 #region nếu tồn tại kiểu: cách đây 1 ngày
 
@@ -1589,7 +1603,7 @@ namespace Crwal.Core.Base
                     }
                 }
 
-                #endregion
+                #endregion nếu tồn tại kiểu: cách đây 1 ngày
 
                 #region nếu tồn tại kiểu: cách đây 1 tuần
 
@@ -1608,7 +1622,7 @@ namespace Crwal.Core.Base
                     }
                 }
 
-                #endregion
+                #endregion nếu tồn tại kiểu: cách đây 1 tuần
             }
 
             return "";
@@ -1623,36 +1637,47 @@ namespace Crwal.Core.Base
                 case "tháng một":
                     month = "01";
                     break;
+
                 case "tháng hai":
                     month = "02";
                     break;
+
                 case "tháng ba":
                     month = "03";
                     break;
+
                 case "tháng tư":
                     month = "04";
                     break;
+
                 case "tháng năm":
                     month = "05";
                     break;
+
                 case "tháng sáu":
                     month = "06";
                     break;
+
                 case "tháng bảy":
                     month = "07";
                     break;
+
                 case "tháng tám":
                     month = "08";
                     break;
+
                 case "tháng chín":
                     month = "09";
                     break;
+
                 case "tháng mười":
                     month = "10";
                     break;
+
                 case "tháng mười một":
                     month = "11";
                     break;
+
                 case "tháng mười hai":
                     month = "12";
                     break;
@@ -1674,48 +1699,70 @@ namespace Crwal.Core.Base
             {
                 case "january":
                     return "01";
+
                 case "jan":
                     return "01";
+
                 case "february":
                     return "02";
+
                 case "feb":
                     return "02";
+
                 case "march":
                     return "03";
+
                 case "mar":
                     return "03";
+
                 case "april":
                     return "04";
+
                 case "apr":
                     return "04";
+
                 case "may":
                     return "05";
+
                 case "june":
                     return "06";
+
                 case "jun":
                     return "06";
+
                 case "july":
                     return "07";
+
                 case "jul":
                     return "07";
+
                 case "august":
                     return "08";
+
                 case "aug":
                     return "08";
+
                 case "september":
                     return "09";
+
                 case "sep":
                     return "09";
+
                 case "october":
                     return "10";
+
                 case "oct":
                     return "10";
+
                 case "november":
                     return "11";
+
                 case "nov":
                     return "11";
+
                 case "december":
                     return "12";
+
                 case "dec":
                     return "12";
             }

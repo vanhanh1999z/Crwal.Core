@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Text;
 using System.Web.Script.Serialization;
-using Newtonsoft.Json;
 
 namespace Crwal.Core.Base
 {

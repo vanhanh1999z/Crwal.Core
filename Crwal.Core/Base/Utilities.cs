@@ -144,7 +144,7 @@ namespace Crwal.Core.Base
                 htmlDoc.OptionAutoCloseOnEnd = true;
                 htmlDoc.LoadHtml(html); //responseString là đoạn html mà bạn lấy được ở phần trước.
 
-                var node = htmlDoc.DocumentNode.SelectNodes(xpath); //div[....]               
+                var node = htmlDoc.DocumentNode.SelectNodes(xpath); //div[....]
 
                 if (node != null && node.Count > 0)
                 {
@@ -332,7 +332,6 @@ namespace Crwal.Core.Base
                 if (src.StartsWith("/")) // bắt đầu bằng dấu
                     return domain + src;
 
-
                 if (src.StartsWith("./")) // bắt đầu bằng dấu ./
                     return domain + src.Remove(0, 1);
 
@@ -438,63 +437,63 @@ namespace Crwal.Core.Base
                 var part_a = @"[á|à|ả|ã|ạ|ă|ắ|ằ|ẳ|ẵ|ặ|â|ấ|ầ|ẩ|ẫ|ậ]";
                 str_input = Regex.Replace(str_input, part_a, "a", RegexOptions.IgnoreCase);
 
-                #endregion
+                #endregion replace a
 
                 #region replace e
 
                 var part_e = @"[é|è|ẹ|ẻ|ẽ|ê|ế|ề|ệ|ể|ễ]";
                 str_input = Regex.Replace(str_input, part_e, "e", RegexOptions.IgnoreCase);
 
-                #endregion
+                #endregion replace e
 
                 #region replace o
 
                 var part_o = @"[ó|ò|ỏ|õ|ọ|ơ|ớ|ờ|ở|ỡ|ợ|ô|ố|ồ|ổ|ỗ|ộ|ố]"; // chữ o thường ò
                 str_input = Regex.Replace(str_input, part_o, "o", RegexOptions.IgnoreCase);
 
-                #endregion
+                #endregion replace o
 
                 #region replace u
 
                 var part_u = @"[ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự]";
                 str_input = Regex.Replace(str_input, part_u, "u", RegexOptions.IgnoreCase);
 
-                #endregion
+                #endregion replace u
 
                 #region replace i
 
                 var part_i = @"[í|ì|ĩ|ị|ỉ]";
                 str_input = Regex.Replace(str_input, part_i, "i", RegexOptions.IgnoreCase);
 
-                #endregion
+                #endregion replace i
 
                 #region replace d
 
                 var part_d = @"[đ]";
                 str_input = Regex.Replace(str_input, part_d, "d", RegexOptions.IgnoreCase);
 
-                #endregion
+                #endregion replace d
 
                 #region replace y
 
                 var part_y = @"[ý|ỳ|ỷ|ỹ|ỵ]";
                 str_input = Regex.Replace(str_input, part_y, "y", RegexOptions.IgnoreCase);
 
-                #endregion
+                #endregion replace y
 
                 #region replace ký tự đặc biệt
 
                 var partSpec = @"[!|@|#|=|$|%|^|&|*|\(|\)|+|\\|\[\]|{|}|:|;|\?|<|>|\.|,]";
                 str_input = Regex.Replace(str_input, partSpec, "");
 
-                #endregion
+                #endregion replace ký tự đặc biệt
 
                 #region có nhiều khoảng trắng - 1 khoảng trắng
 
                 var partMulSpace = @"[\s]{2,}";
                 str_input = Regex.Replace(str_input, partMulSpace, " ").Trim();
 
-                #endregion
+                #endregion có nhiều khoảng trắng - 1 khoảng trắng
 
                 #region khỏang trắng thành dấu _
 
@@ -503,14 +502,14 @@ namespace Crwal.Core.Base
 
                 str_input = str_input.Replace('/', '-');
 
-                #endregion
+                #endregion khỏang trắng thành dấu _
 
                 #region nhiều gạch thành 1 gạch _
 
                 var partLine = @"[-]{2,}";
                 str_input = Regex.Replace(str_input, partLine, "-");
 
-                #endregion
+                #endregion nhiều gạch thành 1 gạch _
             }
             catch
             {
@@ -532,6 +531,7 @@ namespace Crwal.Core.Base
             if (rtbResult.Lines.Length > 100) rtbResult.Clear();
             rtbResult.AppendText(content + Environment.NewLine);
         }
+
         public static void WriteToBox(Exception ex, RichTextBox rtbResult)
         {
             if (rtbResult.Lines.Length > 100) rtbResult.Clear();

@@ -8,6 +8,7 @@ namespace Crwal.Core.Sql
         public string User { get; set; }
         public string Password { get; set; }
         public string DataBase { get; set; }
+
         public ConnectionString(string serverName, string user, string password)
         {
             ServerName = serverName;
@@ -25,6 +26,7 @@ namespace Crwal.Core.Sql
             var dePass = StringCipher.Decrypt(Password);
             return $"Data Source={ServerName};Initial Catalog = social_index_v2; User ID = {User}; Password = {dePass}; CharSet=utf8; Pooling=True";
         }
+
         public string BuildConnectionStringWithDb()
         {
             string dePass = StringCipher.Decrypt(Password);

@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Crwal.Core.Log;
+using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
-using Crwal.Core.Log;
 
 namespace Crwal.Core.Sql
 {

@@ -38,8 +38,8 @@
         public static string RemoveSignVietnameseString(string str)
         {
             for (var i = 1; i < VietnameseSigns.Length; i++)
-            for (var j = 0; j < VietnameseSigns[i].Length; j++)
-                str = str.Replace(VietnameseSigns[i][j], VietnameseSigns[0][i - 1]);
+                for (var j = 0; j < VietnameseSigns[i].Length; j++)
+                    str = str.Replace(VietnameseSigns[i][j], VietnameseSigns[0][i - 1]);
             return str;
         }
     }
