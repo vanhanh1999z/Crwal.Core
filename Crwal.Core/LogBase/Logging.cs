@@ -101,7 +101,7 @@ namespace Crwal.Core.Log
             var config = new LoggingConfiguration();
             var logfile = new FileTarget(Constants.FileTarget)
             {
-                FileName = Path.Combine(path, DateTime.Now.ToString("yyyy-MM-dd") + projectName +Constants.DefaultFileName),
+                FileName = Path.Combine(path, DateTime.Now.ToString("yyyy-MM-dd") + projectName + Constants.DefaultFileName),
                 ArchiveNumbering = ArchiveNumberingMode.Rolling
             };
             var logconsole = new ConsoleTarget(Constants.ConsoleTarget);
