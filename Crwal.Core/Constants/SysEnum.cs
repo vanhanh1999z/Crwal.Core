@@ -54,5 +54,48 @@
             TokenAll = 3,
             TokenJob = 4
         }
+
+        public enum DbType
+        {
+            String = 0,
+            Int = 1,
+            Boolean = 2,
+            Date = 3,
+            DateTime = 4,
+            Time = 5,
+            Float = 6,
+            Decimal = 7,
+            Int16 = 8,
+            Byte = 9,
+            Image = 10,
+            Long = 11,
+            BinaryString = 12
+        }
+        public enum CompareOperator
+        {
+            Equal,
+            NotEqual,
+            GreaterThan,
+            GreaterOrEqual,
+            LessThan,
+            LessOrEqual,
+            Contains,
+            In,
+            NotIn,
+            StartWith,
+            EndWith,
+            IsNull,
+            NotNull
+        }
+        public enum OrderType
+        {
+            Ascending,
+            Descending
+        }
+        public enum LogicalOperator
+        {
+            And,
+            Or
+        }
     }
 }
